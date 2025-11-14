@@ -1,4 +1,3 @@
-// Elemente
 const mmSlider = document.getElementById('mmSlider');
 const mmOutput = document.getElementById('mmOutput');
 const countryDropdown = document.getElementById('countryDropdown');
@@ -22,59 +21,58 @@ const germany = ["","12","11","","10","","8","","7","6","","5","4","3","","2","1
 const holland = ["","12","12","11","10","9","8","7","12","11","K6","","G6","","4 oder 5","","3","0 oder 1","00","","","","","","","","","","","","","",""];
 const sweden = ["","","","","","","","","1","2","","3","4","5","","6","","7","","8","","","","","","","","","","","","","","","",""];
 const switzerland = ["","","","","10","9","0","","8","KL6","","GR6","6","5","5","","4","2","1","0","2/0","3/0","4/0","","","","","","","","","","","","","",""];
-const usa = ["Dust","12","11","","10","9","8","7,5","7","","6","","5","4","3","","2","1","B","BB","BB","0","00","000","","Buck9","","Buck8","","","Buck7","Buck5","Buck4","Buck3","","Buck2","Buck1",""];
+const usa = ["Dust","12","11","","10","9","8","7,5","7","","6","","5","4","3","","2","1","B","BB","BB","0","00","000","","Buck9","","Buck8","","","Buck7","Buck5","Buck4","Buck3","","Buck2","Buck1"];
 
 const lists = { austria, belgium, england, france, germany, holland, sweden, switzerland, usa };
 
-// Startwerte
-let selectedCountry = 'austria';
-let currentList = lists[selectedCountry];
+// Startwert
+let currentList = austria;
 
-// --- Update Output ---
+// Update Output
 function updateMmOutput() {
   const idx = mmSlider.value;
   const sizeValue = currentList[idx] || "NA";
   mmOutput.textContent = `mm: ${mm[idx]} | Size: ${sizeValue}`;
 }
 
-// --- Update Tabelle ---
+// Update Tabelle
 function updateSliderTable() {
   const idx = mmSlider.value;
   sliderTableBody.innerHTML = "";
 
-  Object.keys(lists).forEach(country => {
-    if(country === selectedCountry) return; // ausgewähltes Land ausblenden
-    const sizeValue = lists[country][idx] || "NA";
+  const selectedCountry = countryDropdown.textContent.toLowerCase();
+
+  for (const countryName of Object.keys(lists)) {
+    if (countryName === selectedCountry) continue; // Ausgewähltes Land ausblenden
+    const sizeValue = lists[countryName][idx] || "NA";
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${country.charAt(0).toUpperCase() + country.slice(1)}</td>
+      <td>${countryName.charAt(0).toUpperCase() + countryName.slice(1)}</td>
       <td>${sizeValue}</td>
       <td>${mm[idx]}</td>
     `;
     sliderTableBody.appendChild(row);
-  });
+  }
 }
 
-// --- Events ---
-// mm Slider bewegt Tabelle und Output
+// Events
 mmSlider.addEventListener('input', () => {
   updateMmOutput();
   updateSliderTable();
 });
 
-// Dropdown Auswahl
 dropdownItems.forEach(item => {
   item.addEventListener('click', e => {
     e.preventDefault();
-    selectedCountry = item.getAttribute('data-country');
-    countryDropdown.textContent = item.textContent; // Dropdown Text setzen
-    currentList = lists[selectedCountry];
+    const country = item.getAttribute('data-country');
+    countryDropdown.textContent = item.textContent; 
+    currentList = lists[country];
     updateMmOutput();
     updateSliderTable();
   });
 });
 
-// --- Initialisierung ---
+// Initialisierung
 countryDropdown.textContent = "Austria";
 mmSlider.max = mm.length - 1;
 mmSlider.value = 0;

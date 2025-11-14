@@ -1,0 +1,21 @@
+{
+  "name": "Shotgun Grain Size Calculator",
+  "short_name": "GrainCalc",
+  "description": "Calculate shotgun grain sizes for different countries",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0dcaf0",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
