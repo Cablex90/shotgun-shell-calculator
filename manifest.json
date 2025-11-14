@@ -1,7 +1,7 @@
 {
-  "name": "Shotgun Grain Size Calculator",
-  "short_name": "GrainCalc",
-  "description": "Calculate shotgun grain sizes for different countries",
+  "name": "Shotgun Shell Calculator",
+  "short_name": "ShellCalc",
+  "description": "Calculate shotgun pellet sizes for different countries and their loads with material",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",
