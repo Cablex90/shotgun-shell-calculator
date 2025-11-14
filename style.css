@@ -1,0 +1,17 @@
+/* Kompaktere Slider und Tabellen für mobile Ansicht */
+.compact-slider {
+  max-width: 280px;
+  margin: auto;
+  margin-bottom: 8px;
+}
+.compact-slider output {
+  margin-top: 2px;
+}
+.compact-table {
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 12px;
+}
+.table th, .table td {
+  padding: 0.25rem 0.5rem; /* kompaktere Zellen */
+}

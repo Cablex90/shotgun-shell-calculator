@@ -1,88 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shot Grain Size Calc</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+©Cable_x90
+<title>Shot Size & Load</title>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="bootstrap-5.3.3/css/bootstrap.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="bootstrap-5.3.3/css/bootstrap.css">
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
+<!-- Eigene Styles -->
+<link rel="stylesheet" href="style.css">
 
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#0dcaf0">
-
-    <!-- Favicon für Browser-Tab und Windows PWA -->
-  <link rel="icon" href="img/icon-192.png" sizes="192x192" type="image/png">
-  <link rel="icon" href="img/icon-512.png" sizes="512x512" type="image/png">  
+<meta name="theme-color" content="#0dcaf0">
+<link rel="icon" href="img/icon-192.png" sizes="192x192" type="image/png">
+<link rel="icon" href="img/icon-512.png" sizes="512x512" type="image/png">  
 
 </head>
 <body class="bg-dark text-black">
 
-  ©Cable_x90
-  <main>
-    <img src="img/shell.png" width="250" height="200" style="display:block; margin:auto;">
-    <h1 class="text-light fw-bold text-center">Shotgun Grain Size Calculator</h1>  
-  </main>
+<main class="text-center my-2">
+  <h1 class="text-light fw-bold fs-5">Shot Size & Load</h1>  
+  <img src="img/shell.png" width="260" height="180">
 
-  <div><br></div>
+</main>
 
-  <!-- Dropdown für Länder -->
-  <div class="dropdown mb-3" style="max-width:200px; margin:auto;">
-    <button class="btn btn-info dropdown-toggle w-100" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-      Austria
-    </button>
-    <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
-       <li><a class="dropdown-item" href="#" data-country="austria">Austria</a></li>
-       <li><a class="dropdown-item" href="#" data-country="belgium">Belgium</a></li>
-       <li><a class="dropdown-item" href="#" data-country="england">England</a></li>
-       <li><a class="dropdown-item" href="#" data-country="france">France</a></li>
-       <li><a class="dropdown-item" href="#" data-country="germany">Germany</a></li>
-       <li><a class="dropdown-item" href="#" data-country="holland">Holland</a></li>
-       <li><a class="dropdown-item" href="#" data-country="sweden">Sweden</a></li>
-       <li><a class="dropdown-item" href="#" data-country="switzerland">Switzerland</a></li>    
-       <li><a class="dropdown-item" href="#" data-country="usa">USA</a></li>
-    </ul>
-  </div>
+<!-- Länder Dropdown -->
+<div class="dropdown mb-2 compact-slider">
+  <button class="btn btn-info dropdown-toggle w-100" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    EU
+  </button>
+  <ul class="dropdown-menu w-100" aria-labelledby="countryDropdown">
+    <li><a class="dropdown-item" href="#" data-country="eu">EU</a></li>
+    <li><a class="dropdown-item" href="#" data-country="italy">Italy</a></li>
+    <li><a class="dropdown-item" href="#" data-country="uk">UK</a></li>
+    <li><a class="dropdown-item" href="#" data-country="us">USA</a></li>
+  </ul>
+</div>
 
-  <!-- Slider -->
-  <div class="mb-3" style="max-width:300px; margin:auto;">
-    <output id="mmOutput" class="d-block text-center fw-bold mt-2 text-warning fs-3"></output>
-    <label for="mmSlider" class="form-label d-block text-center text-light fs-3 fw-bold"></label>
-    <input type="range" class="form-range" min="0" max="35" value="0" id="mmSlider">
+<!-- Schrotgröße Slider -->
+<div class="compact-slider">
+  <output id="mmOutput" class="d-block text-center fw-bold text-warning fs-6"></output>
+  <input type="range" class="form-range" min="0" max="37" value="0" id="mmSlider">
+</div>
 
-  </div>
+<!-- Länder Tabelle -->
+<div class="compact-table">
+  <table class="table table-striped table-dark table-sm" id="sliderTable">
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>No.</th>
+        <th>mm</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-  <div class="mb-3" style="max-width:300px; margin:auto;">
-    <table class="table table-striped table-dark" id="sliderTable">
-      <thead>
-        <tr>
-          <th>Country</th>
-          <th>Size</th>
-          <th>mm</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Wird dynamisch vom Slider befüllt -->
-      </tbody>
-    </table>
-  </div>
+<!-- Load Slider -->
+<div class="compact-slider">
+  <output id="loadOutput" class="d-block text-center fw-bold text-info fs-6"></output>
+  <input type="range" class="form-range" min="0" max="7" value="0" id="loadSlider">
+</div>
 
-  <!-- Bootstrap JS Bundle + Dein Script -->
-  <script src="bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+<!-- Speed Slider -->
+<div class="compact-slider">
+  <output id="speedOutput" class="d-block text-center fw-bold text-info fs-6"></output>
+  <input type="range" class="form-range" min="350" max="450" step="10" value="390" id="speedSlider">
+</div>
 
-  <!-- Service Worker Registrierung -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('ServiceWorker registered: ', reg.scope))
-        .catch(err => console.log('ServiceWorker registration failed: ', err));
-      });
-    }
-  </script>
+<!-- Total Energy Anzeige -->
+<div id="totalEnergyDisplay" class="text-center text-warning fw-bold fs-6 mb-3">
+  Total Energy: 0 J
+</div>
+
+<!-- Material Tabelle vertikal -->
+<div class="compact-table">
+  <table class="table table-striped table-dark table-sm" id="loadTable">
+    <thead>
+      <tr>
+        <th>Material</th>
+        <th>Pellets</th>
+        <th>Energy/Pellet</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- Bootstrap JS + eigenes Script -->
+<script src="bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
