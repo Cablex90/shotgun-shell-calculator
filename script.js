@@ -32,7 +32,7 @@ let currentList = austria;
 function updateMmOutput() {
   const idx = mmSlider.value;
   const sizeValue = currentList[idx] || "NA";
-  mmOutput.textContent = `mm: ${mm[idx]} | Size: ${sizeValue}`;
+  mmOutput.textContent =  `Size = mm: ${mm[idx]} | No: ${sizeValue}`;
 }
 
 // Update Tabelle
