@@ -1,4 +1,4 @@
-const CACHE_NAME = "shellcalc-cache-v1";
+const CACHE_NAME = "shellcalc-cache-v2"; // Neue Version
 const urlsToCache = [
   "./index.html",
   "./bootstrap-5.3.3/css/bootstrap.css",
@@ -22,17 +22,19 @@ const urlsToCache = [
   "./img/squirrel.png"
 ];
 
+// Install
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
 });
 
+// Fetch
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request).catch(() => {
-        // Fallback für Dokumente (HTML)
+        // Fallback für HTML-Dokumente
         if (event.request.destination === "document") {
           return caches.match("./index.html");
         }
@@ -41,6 +43,7 @@ self.addEventListener("fetch", event => {
   );
 });
 
+// Activate: alte Caches löschen
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
