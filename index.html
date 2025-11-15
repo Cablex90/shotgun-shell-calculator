@@ -173,27 +173,21 @@
 
 <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(() => console.log("Service Worker registered"))
-    .catch(err => console.log("SW registration failed:", err));
-}
-</script>
-<script>
-if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').then(reg => {
     console.log("Service Worker registered");
     reg.onupdatefound = () => {
       const newSW = reg.installing;
       newSW.onstatechange = () => {
         if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
-          console.log("New SW installed, reloading page");
-          location.reload();
+          console.log("New SW installed, reloading page...");
+          window.location.reload(); // Seite neu laden für Updates
         }
       };
     };
   }).catch(err => console.log("SW registration failed:", err));
 }
 </script>
+
 
 
 

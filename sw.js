@@ -1,4 +1,4 @@
-const CACHE_NAME = "shellcalc-cache-v4"; // Neue Version
+const CACHE_NAME = "shellcalc-cache-v6"; // neue Version, wichtig!
 const urlsToCache = [
   "./index.html",
   "./bootstrap-5.3.3/css/bootstrap.css",
@@ -26,18 +26,7 @@ self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
-});
-
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request).catch(() => {
-        if (event.request.destination === "document") {
-          return caches.match("./index.html");
-        }
-      });
-    })
-  );
+  self.skipWaiting(); // sofort aktiv werden
 });
 
 self.addEventListener("activate", event => {
@@ -49,5 +38,18 @@ self.addEventListener("activate", event => {
       )
     )
   );
-  return self.clients.claim(); // Neue SW sofort aktiv
+  self.clients.claim(); // neue SW sofort übernehmen
+});
+
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request).catch(() => {
+        // Fallback für HTML
+        if (event.request.destination === "document") {
+          return caches.match("./index.html");
+        }
+      });
+    })
+  );
 });
