@@ -1,7 +1,7 @@
 {
   "name": "Shotgun Shell Calculator",
   "short_name": "ShellCalc",
-  "description": "Calculate shotgun pellet sizes for different countries and their loads with material",
+  "description": "Calculate shotgun pellet sizes for different countries and their loads with material, energies and pattern generator.",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",

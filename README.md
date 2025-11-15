@@ -1,6 +1,7 @@
 this is a simple calculator for the different grain sizes in different countries and also with diefferent materials
 
 i also added an energie calculator for the whole load and also for each pellet and how much pellets there are in a load
+added also an pattern generator for each choke, distance and material with realistic skaling pictures of a few animals
 
 have fun with it, if you got any issues report them in the issues section, if anybody got sugestions for a new project let me know ;)
 
