@@ -178,6 +178,27 @@ if ('serviceWorker' in navigator) {
     .catch(err => console.log("SW registration failed:", err));
 }
 </script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(reg => {
+      console.log("SW registered");
+
+      // Prüfen, ob neue SW vorhanden
+      reg.onupdatefound = () => {
+        const newSW = reg.installing;
+        newSW.onstatechange = () => {
+          if (newSW.state === 'installed') {
+            if (navigator.serviceWorker.controller) {
+              alert("Neue Version verfügbar! Seite neu laden.");
+            }
+          }
+        };
+      };
+    })
+    .catch(err => console.log("SW registration failed:", err));
+}
+</script>
 
 
 </body>
